@@ -1,0 +1,3 @@
+https://www.npmjs.com/package/json-server?activeTab=readme
+
+json-server --watch db.json
