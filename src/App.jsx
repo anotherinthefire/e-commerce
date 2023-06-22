@@ -1,33 +1,38 @@
 /* eslint-disable react/jsx-key */
 import React, { useState } from 'react'
 import './App.css'
+import { getCategories, getProducts } from '../fetcher';
 import Category from './components/Category';
+import CategoryProduct from './components/categoryProduct';
 
 function App() {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState({errorMessage: '', data:  []});
+  const [products, setProducts] = useState({errorMessage: '', data:  []});
 
   React.useEffect(() => {
-    fetch("http://localhost:3000/categories")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setCategories(data)
-      })
+    const fetchData = async () => {
+      const data = await getCategories()
+    setCategories(data)
+    }
+    fetchData()
   }, [])
 
+  // React.useEffect(() => {
+  //   const data = fetcher ("/categories")
+  //   setCategories(data)
+  // }, [])
+ 
   const handleCategoryClick = id => {
-    fetch("http://localhost:3000/products?catId=" + id)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setProducts(data)
-      })
+    const fetchData = async () => {
+      const data = await getProducts(id)
+    setProducts(data)
+      }
+      fetchData()
   }
 
   const renderCategories = () => {
 
-    return categories.map(c =>
+    return categories.data.map(c =>
       <Category key={c.id} id={c.id} title={c.title} onCategoryClick={() => handleCategoryClick(c.id)} />
     )
 
@@ -41,8 +46,8 @@ function App() {
 
   const renderProducts = () => {
 
-    return products.map(p =>
-      <div>{p.title}</div>
+    return products.data.map(p =>
+      <CategoryProduct {...p}>{p.title}</CategoryProduct>
     )
   }
 
@@ -51,14 +56,16 @@ function App() {
       <header className='p-8 text-center text-4xl text-white grid bg-gray-500'>My Store</header>
       <section className='flex'>
         <nav className='p-5 flex-0.1 bg-slate-200 pr-40'>
+          { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
           {
-            categories && renderCategories()
+            categories.data && renderCategories()
           }
         </nav>
         <article className='p-3'>
           <h1>Products</h1>
+          { products.errorMessage && <div>Error: {products.errorMessage}</div>}
           {
-            products && renderProducts()
+            products.data && renderProducts()
           }
         </article>
       </section>
