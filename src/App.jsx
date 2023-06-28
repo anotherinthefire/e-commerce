@@ -1,58 +1,41 @@
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import './App.css'
-import { getCategories, getProducts } from '../fetcher';
-import CategoryProduct from './components/categoryProduct';
-import { Link } from 'react-router-dom';
+import { getCategories } from '../fetcher';
+import ProductDetail from './components/productDetail.jsx';
+import Basket from './components/basket.jsx';
+import Checkout from './components/checkout.jsx';
+import Category from './components/Category.jsx';
+import Layout from './components/Layout.jsx';
+import Home from './components/Home';
 
 function App() {
-  const [categories, setCategories] = useState({errorMessage: '', data:  []});
-  const [products, setProducts] = useState({errorMessage: '', data:  []});
+  const [categories, setCategories] = useState({ 
+    errorMessage: '', 
+    data: 
+    [] });
+  // const [products, setProducts] = useState({ errorMessage: '', data: [] });
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCategories()
-    setCategories(data)
+      setCategories(data)
     }
     fetchData()
   }, [])
- 
-  const handleCategoryClick = id => {
-    const fetchData = async () => {
-      const data = await getProducts(id)
-    setProducts(data)
-      }
-      fetchData()
-  }
-
-  const renderCategories = () => {
-
-    return categories.data.map(c =>
-      <li key={c.id}><Link to={`/categories/${c.id}`}>{c.title}</Link></li>
-    )
-  }
 
   return (
     <>
-      <header className='p-8 text-center text-4xl text-white grid bg-gray-500'>My Store</header>
-      <section className='flex'>
-        <nav className='p-5 flex-0.1 bg-slate-200 pr-40'>
-          { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
-          
-          <ul>
-          {
-            categories.data && renderCategories()
-          }
-          </ul>
-        </nav>
-        <article className='p-3'>
-          <h1>Products</h1>
-
-        </article>
-      </section>
-
-      <footer className='p-2 text-center text-white bg-gray-500'>
-        footer
-      </footer>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout categories={categories}/>}>
+            <Route index element={<Home />} />
+            <Route path='basket' element={<Basket />} />
+            <Route path='checkout' element={<Checkout />} />
+            <Route path='products/:productId' element={<ProductDetail />} />
+            <Route path='categories/:categoryId' element={<Category />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 

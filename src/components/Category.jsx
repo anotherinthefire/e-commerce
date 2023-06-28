@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useParams } from "react-router-dom"
 import { getProducts } from "../../fetcher";
 import { useState, useEffect } from "react";
