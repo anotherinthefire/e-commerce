@@ -25,12 +25,6 @@ export const getProducts = id => {
     return fetcher('/products?catId=' + id)
 }
  
-// const BASE_URL = "http://localhost:3000"
-
-// export const fetcher = (url) => {
-//     fetch(BASE_URL + url)
-//     .then(response => response.json())
-//     .then(data => {
-//         return data
-//     })
-// }
+export const getProductById = id => {
+    return fetcher('/products/' + id)
+}

@@ -1,7 +1,41 @@
-/* eslint-disable react/prop-types */
-const Category = ({id, title, onCategoryClick}) => {
+import { useParams } from "react-router-dom"
+import { getProducts } from "../../fetcher";
+import { useState, useEffect } from "react";
+import CategoryProduct from "./categoryProduct";
+
+const Category = ({ id, title, onCategoryClick }) => {
+  const [products, setProducts] = useState({
+    errorMessage: "",
+    data: []
+  })
+
+  const { categoryId } = useParams()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseObject = await getProducts(categoryId);
+        setProducts(responseObject);
+      } catch (error) {
+        setProducts({ errorMessage: 'Error fetching product', data: {} });
+      }
+    };
+
+    fetchData();
+  }, [categoryId]);
+
+  const renderProducts = () => {
+    return products.data.map(p =>
+      <CategoryProduct key={p.id} {...p}>{p.title}</CategoryProduct>
+    )
+  }
+
   return (
-        <div key={id} onClick={() => onCategoryClick(id)}>{title}</div>
+    <div>
+      {products.errorMessage && <div>Error: {products.errorMessage}</div>}
+      {
+        products.data && renderProducts()
+      }
+    </div>
   )
 }
 

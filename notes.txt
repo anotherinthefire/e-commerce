@@ -1,3 +1,25 @@
 https://www.npmjs.com/package/json-server?activeTab=readme
 
-json-server --watch db.json
+json-server --watch ./src/db/db.json
+
+  // React.useEffect(() => {
+  //   const data = fetcher ("/categories")
+  //   setCategories(data)
+  // }, [])
+
+      //     can also use this || alterative
+    //     const categories = []
+    //     for(let i = 0; i < results.length; i++){
+    //       categories.push(<Category key={results[i].id} id={results[i].id} title={results[i].title} />)
+    //     }
+    //  return categories
+
+  // const BASE_URL = "http://localhost:3000"
+
+// export const fetcher = (url) => {
+//     fetch(BASE_URL + url)
+//     .then(response => response.json())
+//     .then(data => {
+//         return data
+//     })
+// }

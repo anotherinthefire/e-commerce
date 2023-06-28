@@ -1,26 +1,20 @@
-/* eslint-disable react/jsx-key */
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { getCategories, getProducts } from '../fetcher';
-import Category from './components/Category';
 import CategoryProduct from './components/categoryProduct';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [categories, setCategories] = useState({errorMessage: '', data:  []});
   const [products, setProducts] = useState({errorMessage: '', data:  []});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const data = await getCategories()
     setCategories(data)
     }
     fetchData()
   }, [])
-
-  // React.useEffect(() => {
-  //   const data = fetcher ("/categories")
-  //   setCategories(data)
-  // }, [])
  
   const handleCategoryClick = id => {
     const fetchData = async () => {
@@ -33,21 +27,7 @@ function App() {
   const renderCategories = () => {
 
     return categories.data.map(c =>
-      <Category key={c.id} id={c.id} title={c.title} onCategoryClick={() => handleCategoryClick(c.id)} />
-    )
-
-    //     can also use this || alterative
-    //     const categories = []
-    //     for(let i = 0; i < results.length; i++){
-    //       categories.push(<Category key={results[i].id} id={results[i].id} title={results[i].title} />)
-    //     }
-    //  return categories
-  }
-
-  const renderProducts = () => {
-
-    return products.data.map(p =>
-      <CategoryProduct {...p}>{p.title}</CategoryProduct>
+      <li key={c.id}><Link to={`/categories/${c.id}`}>{c.title}</Link></li>
     )
   }
 
@@ -57,16 +37,16 @@ function App() {
       <section className='flex'>
         <nav className='p-5 flex-0.1 bg-slate-200 pr-40'>
           { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
+          
+          <ul>
           {
             categories.data && renderCategories()
           }
+          </ul>
         </nav>
         <article className='p-3'>
           <h1>Products</h1>
-          { products.errorMessage && <div>Error: {products.errorMessage}</div>}
-          {
-            products.data && renderProducts()
-          }
+
         </article>
       </section>
 
