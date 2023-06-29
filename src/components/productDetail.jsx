@@ -20,10 +20,8 @@ const ProductDetail = () => {
   }, [productId]);
 
   const createMarkup = () => {
-    return {__html: product.data?.description}
+    return { __html: product.data?.description }
   }
-
-
 
   return (
     <article>
@@ -32,25 +30,24 @@ const ProductDetail = () => {
       </div>
       <div className="grid grid-cols-3 space-x-11">
         <figure>
-          <div className="">
+          <div>
             <img src={`../public/assets/${product.data.image}`} alt={product.data.title} />
           </div>
         </figure>
 
         <aside>
-          <div className="">
+          <div>
             <h3>Dimensions</h3>
             <label>{product.data.specs?.dimensions}</label>
           </div>
 
           {product.data.specs?.capacity && (
-            <div className="">
+            <div>
               <h3>Capacity</h3>
               <label>{product.data.specs.capacity}</label>
             </div>
           )}
-
-          <div className="">
+          <div>
             <h3>Features</h3>
             <ul className="list-disc">
               {product.data.features?.map((f, i) => (
@@ -60,7 +57,7 @@ const ProductDetail = () => {
           </div>
         </aside>
 
-        <aside className="">
+        <aside>
           <div className="font-bold text-2xl">
             &pound;{product.data.price}
           </div>

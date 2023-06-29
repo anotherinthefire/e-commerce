@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import {useContext} from 'react'
+import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { CartContext }  from '../context/cartContext'
+import { CartContext } from '../context/cartContext'
 
 
 const CategoryProduct = ({
@@ -14,8 +14,7 @@ const CategoryProduct = ({
   stock
 }) => {
   const navigate = useNavigate()
-  const cartContext = useContext(CartContext)
-  const {addProduct} = cartContext
+  const { addProduct } = useContext(CartContext)
 
   return (
     <article>
@@ -24,13 +23,13 @@ const CategoryProduct = ({
       </div>
       <div className="grid grid-cols-3 space-x-11">
         <figure>
-          <div className="">
+          <div>
             <img src={`/assets/${image}`} alt={title} />
           </div>
         </figure>
 
         <aside>
-          <div className="">
+          <div>
             <h3>Dimensions</h3>
             <label>{specs.dimensions}</label>
           </div>
@@ -38,13 +37,13 @@ const CategoryProduct = ({
           {
             specs.capcity &&
 
-            <div className="">
+            <div>
               <h3>Dimensions</h3>
               <label>{specs.capacity}</label>
             </div>
           }
 
-          <div className="">
+          <div>
             <h3>Features</h3>
             <ul className="list-disc">
               {features?.map((f, i) => {
@@ -54,7 +53,7 @@ const CategoryProduct = ({
           </div>
         </aside>
 
-        <aside className="">
+        <aside>
           <div className="font-bold text-2xl">
             &pound;{price}
           </div>
@@ -65,13 +64,13 @@ const CategoryProduct = ({
           </div>
 
           <div className="mt-5 space-y-3">
-            <button 
-            onClick={() => navigate(`products/${id}`)} 
-            className="px-2 py-1 bg-gray-300 rounded-xl border-1 border-gray-500">View Product</button><br />
-            
-            <button 
-            onClick={() => addProduct({id, title, price})}
-            className="px-2 py-1 bg-gray-300 rounded-xl border-1 border-gray-500">Add to Basket</button>
+            <button
+              onClick={() => navigate(`products/${id}`)}
+              className="px-2 py-1 bg-gray-300 rounded-xl border-1 border-gray-500">View Product</button><br />
+
+            <button
+              onClick={() => addProduct({ id, title, price })}
+              className="px-2 py-1 bg-gray-300 rounded-xl border-1 border-gray-500">Add to Basket</button>
           </div>
         </aside>
       </div>

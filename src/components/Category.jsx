@@ -21,7 +21,6 @@ const Category = ({ id, title, onCategoryClick }) => {
         setProducts({ errorMessage: 'Error fetching product', data: {} });
       }
     };
-
     fetchData();
   }, [categoryId]);
 
