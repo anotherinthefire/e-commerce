@@ -7,6 +7,7 @@ import Checkout from './components/checkout.jsx';
 import Category from './components/Category.jsx';
 import Layout from './components/Layout.jsx';
 import Home from './components/Home';
+import OrderConfirmation from './components/orderConfirmation';
 
 function App() {
   const [categories, setCategories] = useState({ 
@@ -33,6 +34,7 @@ function App() {
             <Route path='checkout' element={<Checkout />} />
             <Route path='products/:productId' element={<ProductDetail />} />
             <Route path='categories/:categoryId' element={<Category />} />
+            <Route path='orderconfirmation' element={<OrderConfirmation />}/>
           </Route>
         </Routes>
       </BrowserRouter>
