@@ -2,6 +2,8 @@ https://www.npmjs.com/package/json-server?activeTab=readme
 
 json-server --watch ./src/db/db.json
 
+dont put the search in layout because its not going to refresh and will repeatedly call the api as long as it has the value
+
   // React.useEffect(() => {
   //   const data = fetcher ("/categories")
   //   setCategories(data)

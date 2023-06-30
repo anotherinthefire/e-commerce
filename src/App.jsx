@@ -8,6 +8,7 @@ import Category from './components/Category.jsx';
 import Layout from './components/Layout.jsx';
 import Home from './components/Home';
 import OrderConfirmation from './components/orderConfirmation';
+import SearchResults from './components/searchResult';
 
 function App() {
   const [categories, setCategories] = useState({ 
@@ -35,6 +36,7 @@ function App() {
             <Route path='products/:productId' element={<ProductDetail />} />
             <Route path='categories/:categoryId' element={<Category />} />
             <Route path='orderconfirmation' element={<OrderConfirmation />}/>
+            <Route path='search' element={<SearchResults />} />
           </Route>
         </Routes>
       </BrowserRouter>

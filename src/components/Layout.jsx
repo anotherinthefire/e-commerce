@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Outlet, Link } from "react-router-dom"
+import Search from "./search"
 
 const Layout = ({ categories }) => {
   const renderCategories = () => {
@@ -25,9 +26,9 @@ const Layout = ({ categories }) => {
               </svg>
             </Link>
           </div>
-
+          
           <span>Our Store</span>
-
+          <Search />
           <div>
             <Link to={'/basket'}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
