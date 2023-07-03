@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom"
 import { getProductByQuery } from "../../fetcher"
 import { useEffect, useState } from "react"
 import CategoryProduct from "./categoryProduct"
+import Search from "./search"
 
 const SearchResults = () => {
   const [products, setProducts] = useState({
@@ -37,7 +38,9 @@ const SearchResults = () => {
         </CategoryProduct>
       ));
     } else {
-      return <div>No results found.</div>
+      return <div>
+        <Search /> <br />
+        No results found.</div>
     }
   };
 

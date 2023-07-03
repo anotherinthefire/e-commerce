@@ -2,7 +2,7 @@
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CartContext } from '../context/cartContext'
-
+import Search from './search'
 
 const CategoryProduct = ({
   id,
@@ -18,6 +18,7 @@ const CategoryProduct = ({
 
   return (
     <article>
+      <Search />
       <div className="mt-10 mb-2 font-bold text-2xl">
         <Link to={`/products/${id}`}>{title}</Link>
       </div>
