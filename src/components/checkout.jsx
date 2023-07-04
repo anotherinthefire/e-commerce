@@ -54,7 +54,7 @@ const Checkout = () => {
                   placeholder="Enter name"
                   name="name"
                   type="text"
-                  className="border border-black text-black text-sm rounded-sm block w-full">
+                  className="error border border-black text-black text-sm rounded-sm block w-full">
                 </input>
               </td>
               <td className="text-right pt-2">Email</td>

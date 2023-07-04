@@ -6,8 +6,8 @@ const Layout = ({ categories }) => {
 
     return categories.data.map(c =>
       <li key={c.id}>
-        <Link to={`/categories/${c.id}`}>
-          {c.title}
+        <Link to={`/categories/${c.id}`} className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+          <span className="text-sm font-medium ml-10">{c.title}</span>
         </Link>
       </li>
     )
@@ -15,7 +15,7 @@ const Layout = ({ categories }) => {
 
   return (
     <>
-      <header className='p-8 text-center text-4xl text-white grid bg-gray-500'>
+      <header className='p-8 text-center text-4xl text-white grid bg-gray-900'>
         <div className="flex justify-between items-center">
           <div>
             <Link to={'/'}>
@@ -25,9 +25,9 @@ const Layout = ({ categories }) => {
               </svg>
             </Link>
           </div>
-          
-          <span>Our Store</span>
-          
+
+          <span>Swap sa Bakal Bote</span>
+
           <div>
             <Link to={'/basket'}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -39,21 +39,22 @@ const Layout = ({ categories }) => {
       </header>
 
       <section className='flex'>
-        <nav className='p-5 flex-0.1 bg-slate-200 pr-40'>
-          {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
-
-          <ul>
+        <nav className="min-h-screen flex flex-row bg-gray-100">
+          <div className="flex flex-col w-56 bg-white overflow-hidden">
+            {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
+            <ul className="flex flex-col py-4">
             {
               categories.data && renderCategories()
             }
-          </ul>
+            </ul>
+          </div>
         </nav>
         <article className='p-3'>
           <Outlet />
         </article>
       </section>
 
-      <footer className='p-2 text-center text-white bg-gray-500'>
+      <footer className='p-2 text-center text-white bg-gray-900'>
         <Link to="/">Home</Link> | <Link to="/basket">Basket</Link>
       </footer>
     </>
